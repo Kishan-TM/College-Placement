@@ -1,0 +1,78 @@
+{% extends 'tutorindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Update Profile</h6>
+            <h1 class="mb-5">Update Your Profile</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Update Profile</h2>
+                        
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name:</label>
+                                <input type="text" id="name" name="name" class="form-control" value="{{ tutor.name }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control" value="{{ tutor.email }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="pswd" class="form-label">Password:</label>
+                                <input type="password" id="pswd" name="pswd" class="form-control" value="{{ tutor.pswd }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Date of Birth:</label>
+                                <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" value="{{ tutor.date_of_birth|date:'Y-m-d' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number:</label>
+                                <input type="text" id="phone" name="phone" class="form-control" value="{{ tutor.phone }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address:</label>
+                                <textarea id="address" name="address" class="form-control" rows="3">{{ tutor.address }}</textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="qualification" class="form-label">Qualification:</label>
+                                <input type="text" id="qualification" name="qualification" class="form-control" value="{{ tutor.qualification }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="experience_years" class="form-label">Experience (in years):</label>
+                                <input type="number" id="experience_years" name="experience_years" class="form-control" value="{{ tutor.experience_years }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Course/Subject:</label>
+                                <input type="text" id="subject" name="subject" class="form-control" value="{{ tutor.subject }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="resume" class="form-label">Upload Resume:</label>
+                                <input type="file" id="resume" name="resume" class="form-control">
+                            </div>
+                            
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Update Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

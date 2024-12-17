@@ -1,0 +1,28 @@
+{% extends 'studentindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3 d-inline-block">Training Enrollment</h6>
+            <h1 class="mb-5">Enroll in Training Session</h1>
+        </div>
+
+        <div class="card mx-auto shadow-lg border-0" style="max-width: 600px; border-radius: 15px;">
+            <div class="card-body p-4">
+                <h5 class="card-title text-center text-primary fw-bold mb-4">Session Details</h5>
+                <p class="mb-2"><strong>Title:</strong> {{ session.title }}</p>
+                <p class="mb-2"><strong>Description:</strong> {{ session.description }}</p>
+                <p class="mb-2"><strong>Date:</strong> {{ session.date }}</p>
+                <p class="mb-2"><strong>Location:</strong> {{ session.location }}</p>
+                <p class="mb-4"><strong>Instructor:</strong> {{ session.instructor }}</p>
+
+                <form method="POST" action="" class="text-center">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Confirm Enrollment</button>
+                    <a href="{% url 'student_training_session' %}" class="btn btn-outline-secondary btn-lg w-100">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

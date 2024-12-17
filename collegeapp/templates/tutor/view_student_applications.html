@@ -1,0 +1,62 @@
+{% extends 'tutorindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-light text-primary px-3 rounded d-inline-block">Student Job Applications</h6>
+            <h1 class="mb-5 text-dark">View Student Job Applications</h1>
+        </div>
+
+        <!-- Search Bar (Optional) -->
+        <div class="mb-4">
+            <input type="text" id="jobAppSearch" class="form-control form-control-lg shadow-sm" placeholder="Search job applications..." onkeyup="searchJobApplications()" />
+        </div>
+
+        <!-- Table -->
+        {% if applications %}
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Student Name</th>
+                        <th>Student Email</th>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Applied On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ application.student.name }}</td>
+                        <td>{{ application.student.email }}</td>
+                        <td>{{ application.job.title }}</td>
+                        <td>{{ application.job.company_name }}</td>
+                        <td>{{ application.application_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-center text-muted">No job applications found.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+// JavaScript for live search functionality
+function searchJobApplications() {
+    const input = document.getElementById('jobAppSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(input) ? '' : 'none';
+    });
+}
+</script>
+
+{% endblock %}

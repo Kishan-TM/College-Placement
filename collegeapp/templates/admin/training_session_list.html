@@ -1,0 +1,89 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Training Sessions</h6>
+            <h1 class="mb-5">List of Training Sessions</h1>
+        </div>
+
+        <!-- Search bar -->
+        <div class="mb-4">
+            <input type="text" id="sessionSearch" class="form-control" placeholder="Search training sessions..." onkeyup="searchSessions()" />
+        </div>
+
+        {% if sessions %}
+        <div class="table-responsive mt-5">
+            <table id="sessionTable" class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Instructor</th>
+                        <th>Attendees</th>
+                        <th>Actions</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody> 
+                    {% for session in sessions %}
+                    <tr>
+                        <td>{{ session.title }}</td>
+                        <td>{{ session.description }}</td>
+                        <td>{{ session.date }}</td>
+                        <td>{{ session.location }}</td>
+                        <td>{{ session.instructor }}</td>
+                        <td>{{ session.attendees.count }}</td>
+                        <td>
+                            <!-- Button to export attendees for the specific session -->
+                            <a href="{% url 'export_training_session_attendees' %}?id={{session.id}}" class="btn btn-primary btn-sm">Download Attendees (Excel)</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'delete_training_session' %}?id={{session.id}}" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No training sessions found.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+// JavaScript for search functionality
+function searchSessions() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById('sessionSearch');
+    filter = input.value.toLowerCase();
+    table = document.getElementById("sessionTable");
+    tr = table.getElementsByTagName('tr');
+    
+    // Loop through all table rows and hide those that don't match the search query
+    for (i = 1; i < tr.length; i++) {  // Start from 1 to avoid header row
+        td = tr[i].getElementsByTagName('td');
+        var found = false;
+        for (var j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (found) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+{% endblock %}

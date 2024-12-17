@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Student Dashboard - eLearning Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="eLearning, Dashboard, Student">
+    <meta name="description" content="Student Dashboard for managing courses, jobs, and training on the eLearning Platform.">
+
+    <!-- Favicon -->
+    <link href="/static/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div> -->
+    <!-- Spinner End -->
+    
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="{% url 'studentindex' %}" class="nav-item nav-link active">Home</a>
+                <!-- <a href="" class="nav-item nav-link">Courses</a> -->
+                <a href="{% url 'student_profile' %}" class="nav-item nav-link">Profile</a>
+                <a href="{% url 'login' %}" class="nav-item nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    {% block content %}
+    <!-- Main Content Start -->
+    <div class="container mt-5">
+        <h1>Welcome, {{ student.name }}!</h1>
+        <div class="row">
+            <!-- Available Jobs Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="/static/img/available_jobs.jpeg" class="card-img-top" alt="Explore available jobs" style="object-fit: cover; height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Available Jobs</h5>
+                        <p class="card-text">Explore available jobs related to your courses and interests.</p>
+                        <a href="{% url 'student_job_list' %}" class="btn btn-primary">View Jobs</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Track Job Applications Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="/static/img/job_status.jpeg" class="card-img-top" alt="Track job applications" style="object-fit: cover; height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Track Job Applications</h5>
+                        <p class="card-text">View the status of your job applications and receive updates.</p>
+                        <a href="{% url 'track_applications' %}" class="btn btn-primary">Track Applications</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Sessions Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="/static/img/training_sessions.jpeg" class="card-img-top" alt="Attend training sessions" style="object-fit: cover; height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Training Sessions</h5>
+                        <p class="card-text">Attend training sessions to improve your skills and job prospects.</p>
+                        <a href="{% url 'student_training_session' %}" class="btn btn-primary">View Sessions</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content End -->
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Quick Links</h4>
+                    <a class="btn btn-link" href="#">About Us</a>
+                    <a class="btn btn-link" href="#">Contact Us</a>
+                    <a class="btn btn-link" href="#">Privacy Policy</a>
+                    <a class="btn btn-link" href="#">Terms & Conditions</a>
+                    <a class="btn btn-link" href="#">FAQs & Help</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Gallery</h4>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="/static/img/course-1.jpg" alt="Course 1">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="/static/img/course-2.jpg" alt="Course 2">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid bg-light p-1" src="/static/img/course-3.jpg" alt="Course 3">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Newsletter</h4>
+                    <p>Subscribe to stay updated on the latest courses and training sessions.</p>
+                    <div class="position-relative">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="/static/lib/jquery/jquery.min.js"></script>
+    <script src="/static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

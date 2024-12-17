@@ -1,0 +1,73 @@
+{% extends 'adminIndex.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Welcome!</h1>
+    <!-- <p class="lead">Here’s an overview of your portal.</p> -->
+
+    <div class="row">
+        <!-- Manage Tutor Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/static/img/manage_tutor.jpeg" class="card-img-top" alt="Manage Jobs" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">Manage Tutor</h5>
+                    <p class="card-text">Manage the list of tutors in the system. You can approve or reject tutor applications.</p>
+                    <a href="{% url 'manage_tutor' %}" class="btn btn-primary">Manage Tutor</a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Approved Tutor Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/static/img/approved_tutors.jpeg" class="card-img-top" alt="Students" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">Approved Tutors List</h5>
+                    <p class="card-text">View the list of tutors who have been approved to teach. You can see their qualifications and subjects.</p>
+                    <a href="{% url 'approved_tutors' %}" class="btn btn-primary">Approved Tutors</a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Rejected Tutor List Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/static/img/rejected_tutors.jpeg" class="card-img-top" alt="Job Listings" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">Rejected Tutor List</h5>
+                    <p class="card-text">View the list of tutors whose applications were rejected. You can review their details for future reference.</p>
+                    <a href="{% url 'rejected_tutors' %}" class="btn btn-primary">Rejected Tutors</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- <div class="row mt-4">
+        <--Approve Tutors Card -->
+        <!-- <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/static/img/approve_tutors.jpg" class="card-img-top" alt="Approve Tutors" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">Approve Tutors</h5>
+                    <p class="card-text">Review tutor profiles and approve their registration.</p>
+                    <a href="" class="btn btn-primary">Review Tutors</a>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Download Files Card -->
+        <!-- <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="/static/img/download_excel.jpg" class="card-img-top" alt="Download Excel" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title">Download Reports</h5>
+                    <p class="card-text">Export data and reports in Excel format.</p>
+                    <a href="" class="btn btn-primary">Download Files</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+<!-- Main Content End -->
+ {% endblock %}

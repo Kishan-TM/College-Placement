@@ -1,0 +1,42 @@
+{% extends 'studentindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Apply for Job</h6>
+            <h1 class="mb-5">Job Application</h1>
+        </div>
+
+        <!-- Display any messages (success/error) -->
+        <!-- {% if messages %}
+        <div class="alert alert-info">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %} -->
+
+        <!-- Job Details -->
+        <div class="job-details mb-4 p-4 bg-light rounded shadow-sm">
+            <h3>{{ job.title }}</h3>
+            <p><strong>Company:</strong> {{ job.company_name }}</p>
+            <p><strong>Location:</strong> {{ job.location }}</p>
+            <p><strong>Description:</strong> {{ job.description }}</p>
+            {% if job.qualifications %}
+            <p><strong>Qualifications:</strong> {{ job.qualifications }}</p>
+            {% endif %}
+            <p><em>Posted on {{ job.created_at|date:"F j, Y" }}</em></p>
+        </div>
+
+        <!-- Application Form -->
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="student_id" value="{{ student.id }}">
+            <button type="submit" class="btn btn-primary btn-lg">Confirm Application</button>
+            <a href="{% url 'student_job_list' %}" class="btn btn-secondary btn-lg">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'adminindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Approved Tutors</h6>
+            <h1 class="mb-5">List of Approved Tutors</h1>
+        </div>
+
+        <!-- Search bar -->
+        <div class="mb-4">
+            <input type="text" id="tutorSearch" class="form-control" placeholder="Search tutors..." onkeyup="searchTutors()" />
+        </div>
+
+        {% if tutors %}
+        <div class="table-responsive mt-5">
+            <table id="tutorTable" class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Qualifications</th>
+                        <th>Subject</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tutor in tutors %}
+                    <tr>
+                        <td>{{ tutor.name }}</td>
+                        <td>{{ tutor.email }}</td>
+                        <td>{{ tutor.qualification }}</td>
+                        <td>{{ tutor.subject }}</td>
+                        <td>
+                            {% if tutor.status == 'Approved' %}
+                                <span class="badge bg-success">Approved</span>
+                            {% else %}
+                                <span class="badge bg-warning">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <!-- Reject Button -->
+                            <a href="{% url 'reject_tutor' %}?id={{tutor.id}}" class="btn btn-danger btn-sm">Reject</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No approved tutors found.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+// JavaScript for search functionality
+function searchTutors() {
+    var input, filter, table, tr, td, i, j, txtValue;
+    input = document.getElementById('tutorSearch');
+    filter = input.value.toLowerCase();
+    table = document.getElementById("tutorTable");
+    tr = table.getElementsByTagName('tr');
+
+    // Loop through all table rows and hide those that don't match the search query
+    for (i = 1; i < tr.length; i++) {  // Start from 1 to avoid header row
+        td = tr[i].getElementsByTagName('td');
+        var found = false;
+        for (j = 0; j < td.length; j++) {
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (found) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+{% endblock %}

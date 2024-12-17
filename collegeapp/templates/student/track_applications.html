@@ -1,0 +1,42 @@
+{% extends 'studentindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-light text-primary px-3 rounded d-inline-block">Your Job Applications</h6>
+            <h1 class="mb-5 text-dark">View Your Job Applications</h1>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Application Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ application.job.title }}</td>
+                            <td>{{ application.job.company_name }}</td>
+                            <td>{{ application.application_date }}</td>
+                            <td>{{ application.status }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-muted">You haven't applied for any jobs yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Edit Job Listing</h6>
+            <h1 class="mb-5">Edit Job</h1>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="form-container bg-light p-4 rounded shadow-sm">
+                    <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" name="title" value="{{ job.title }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Job Description</label>
+                        <textarea class="form-control" name="description" rows="5">{{ job.description }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Qualifications</label>
+                        <textarea class="form-control" name="qualifications" rows="5">{{ job.qualifications }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="course" class="form-label">Course</label>
+                        <input type="text" class="form-control" name="course" value="{{ job.course }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" name="location" value="{{ job.location }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="company_name" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" name="company_name" value="{{ job.company_name }}" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" name="is_active" {% if job.is_active %}checked{% endif %}>
+                        <label class="form-check-label" for="is_active">Active</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

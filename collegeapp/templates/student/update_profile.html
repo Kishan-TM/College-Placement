@@ -1,0 +1,80 @@
+{% extends 'studentindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Update Profile</h6>
+            <h1 class="mb-5">Update Your Profile</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Update Profile</h2>
+                        
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name:</label>
+                                <input type="text" id="name" name="name" class="form-control" value="{{ student.name }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control" value="{{ student.email }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="pswd" class="form-label">Password:</label>
+                                <input type="password" id="pswd" name="pswd" class="form-control" value="{{ student.pswd }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="date_of_birth" class="form-label">Date of Birth:</label>
+                                <input type="date" id="date_of_birth" name="date_of_birth" class="form-control" value="{{ student.date_of_birth|date:'Y-m-d' }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="phn" class="form-label">Phone Number:</label>
+                                <input type="text" id="phn" name="phn" class="form-control" value="{{ student.phn }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address:</label>
+                                <textarea id="address" name="address" class="form-control" rows="3">{{ student.address }}</textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="student_class" class="form-label">Class:</label>
+                                <input type="text" id="student_class" name="student_class" class="form-control" value="{{ student.student_class }}">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="course" class="form-label">Course:</label>
+                                <input type="text" id="course" name="course" class="form-control" value="{{ student.course }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="supply" class="form-label">Supplies:</label>
+                                <input type="text" id="supply" name="supply" class="form-control" value="{{ student.supply }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="picture" class="form-label">Upload Your Picture:</label>
+                                <input type="file" id="picture" name="picture" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="resume" class="form-label">Upload Resume:</label>
+                                <input type="file" id="resume" name="resume" class="form-control">
+                            </div>
+                            
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-info btn-lg">Update Profile</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

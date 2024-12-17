@@ -1,0 +1,74 @@
+{% extends 'tutorindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-light text-primary px-3 rounded d-inline-block">Verify Supplies</h6>
+            <h1 class="mb-5 text-dark">Verify Student Supplies</h1>
+        </div>
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <input type="text" id="studentSearch" class="form-control form-control-lg shadow-sm" placeholder="Search students..." onkeyup="searchStudents()" />
+        </div>
+        <!-- Table -->
+        {% if students %}
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Supply</th>
+                        <th>Verified</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.supply }}</td>
+                        <td>
+                            {% if student.verified %}
+                            <span class="badge bg-success text-white">Verified</span>
+                            {% else %}
+                            <span class="badge bg-danger text-white">Not Verified</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="post" class="d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ student.id }}">
+                                {% if student.verified %}
+                                <button type="submit" name="verified" value="False" class="btn btn-danger btn-sm">Reject</button>
+                                {% else %}
+                                <button type="submit" name="verified" value="True" class="btn btn-success btn-sm">Approve</button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-center text-muted">No students found with unverified supplies.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+// JavaScript for live search functionality
+function searchStudents() {
+    const input = document.getElementById('studentSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('tr');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(input) ? '' : 'none';
+    });
+}
+</script>
+
+{% endblock %}

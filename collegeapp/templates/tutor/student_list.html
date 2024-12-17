@@ -1,0 +1,87 @@
+{% extends 'tutorindex.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <!-- Title -->
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-light text-primary px-3 rounded d-inline-block shadow-sm">Student List</h6>
+            <h1 class="mb-5 text-dark fw-bold">List of Students</h1>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="input-group mb-4 shadow-sm">
+            <span class="input-group-text bg-dark text-white" id="search-addon">
+                <i class="bi bi-search"></i>
+            </span>
+            <input 
+                type="text" 
+                id="studentSearch" 
+                class="form-control form-control-lg" 
+                placeholder="Search students by name, email, or course..." 
+                aria-label="Search students" 
+                onkeyup="searchStudents()"
+            />
+        </div>
+
+        <!-- Download Button -->
+        <!-- <a href="" class="btn btn-primary rounded-pill shadow-sm"> -->
+        <div class="text-end mb-4">
+            <a href="{% url 'export_students_to_excel' %}" class="btn btn-info shadow-sm">
+                <i class="bi bi-download"></i> Download Details (Excel)
+            </a>
+        </div>
+
+        <!-- Student Table -->
+        <div class="table-responsive mt-5">
+            <table id="tutorTable" class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Course</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable">
+                    {% if students %}
+                        {% for student in students %}
+                            <tr class="student-row">
+                                <td>{{ forloop.counter }}</td>
+                                <td class="text-capitalize">{{ student.name }}</td>
+                                <td>{{ student.email }}</td>
+                                <td class="text-capitalize">{{ student.course }}</td>
+                                <td>
+                                    <a 
+                                        href="{% url 'view_profile' %}?id={{ student.id }}" 
+                                        class="btn btn-info btn-sm "
+                                    >
+                                        View Profile
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-muted text-center">No students found. Please check your subject assignment.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for live search -->
+<script>
+function searchStudents() {
+    const input = document.getElementById('studentSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('.student-row');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(input) ? '' : 'none';
+    });
+}
+</script>
+{% endblock %}

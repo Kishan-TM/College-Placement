@@ -1,0 +1,68 @@
+{% extends 'studentindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Student Profile</h6>
+            <h1 class="mb-5">View Your Profile</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4"></h2>
+                        <div class="card-body">
+                            <!-- Profile Picture -->
+                            {% if student.picture %}
+                                <div class="text-center mb-3">
+                                    <img src="{{ student.picture.url }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 200px;">
+                                </div>
+                            {% endif %}
+                
+                           <!-- Personal Details -->
+                            <p><strong>Name:</strong> {{ student.name }}</p>
+                            <p><strong>Email:</strong> {{ student.email }}</p>
+                            <p><strong>Phone:</strong> {{ student.phn }}</p>
+                            <p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
+                            <p><strong>Address:</strong> {{ student.address }}</p>
+                            <p><strong>Class:</strong> {{ student.student_class }}</p>
+                            <p><strong>Course:</strong> {{ student.course }}</p>
+
+                            <!-- Verification Status -->
+                            <p><strong>Verified:</strong>
+                                {% if student.verified %}
+                                    <span class="badge bg-success">Verified</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Not Verified</span>
+                                {% endif %}
+                            </p>
+
+                            <!-- Profile Picture -->
+                            <!-- {% if student.picture %}
+                                <p><strong>Profile Picture:</strong></p>
+                                <img src="{{ student.picture.url }}" alt="Student Picture" class="img-thumbnail" style="max-width: 150px;">
+                            {% endif %} -->
+
+                            <!-- Supplies -->
+                            {% if student.supply %}
+                                <p><strong>Supplies:</strong> {{ student.supply }}</p>
+                            {% endif %}
+
+                            <!-- Resume -->
+                            {% if student.resume %}
+                                <a href="{{ student.resume.url }}" class="btn btn-primary">
+                                    <i class="bi bi-file-earmark-text"></i> View Resume
+                                </a>
+                            {% endif %}
+
+                        </div> 
+                        <div>
+                            <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

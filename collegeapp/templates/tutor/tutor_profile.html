@@ -1,0 +1,59 @@
+{% extends 'tutorindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Tutor Profile</h6>
+            <h1 class="mb-5">View Your Profile</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 col-sm-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4"></h2>
+                        <div class="card-body">
+                            <!-- Profile Picture -->
+                            <!-- {% if student.picture %}
+                                <div class="text-center mb-3">
+                                    <img src="{{ student.picture.url }}" alt="Profile Picture" class="img-thumbnail" style="max-width: 200px;">
+                                </div>
+                            {% endif %} -->
+                
+                           <!-- Personal Details -->
+                            <p><strong>Name:</strong> {{ tutor.name }}</p>
+                            <p><strong>Email:</strong> {{ tutor.email }}</p>
+                            <p><strong>Phone:</strong> {{ tutor.phone }}</p>
+                            <p><strong>Date of Birth:</strong> {{ tutor.date_of_birth }}</p>
+                            <p><strong>Address:</strong> {{ tutor.address }}</p>
+                            <p><strong>Qualification:</strong> {{ tutor.qualification }}</p>
+                            <p><strong>Experience:</strong> {{ tutor.experience_years }} years</p>
+                            <p><strong>Course:</strong> {{ tutor.subject }}</p>
+
+                            <!-- Verification Status -->
+                            <p><strong>Verified:</strong>
+                                {% if tutor.is_approved %}
+                                    <span class="badge bg-success">Verified</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Not Verified</span>
+                                {% endif %}
+                            </p>
+
+                            <!-- Profile Picture -->
+                            {% if tutor.resume %}
+                                <p><strong>Resume:</strong></p>
+                                <a href="{{ tutor.resume.url }}" class="btn btn-primary">
+                                    <i class="bi bi-file-earmark-text"></i> View Resume
+                                </a>
+                            {% endif %}
+
+                        </div> 
+                        <div>
+                            <a href="{% url 'tutor_edit_profile' %}" class="btn btn-primary">Update Profile</a>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

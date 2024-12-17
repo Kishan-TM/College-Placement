@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Login</h6>
+            <h1 class="mb-5">Sign in to Your Account</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="form-container">
+                    <!-- Login Form -->
+                    <form method="POST" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="pswd" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="pswd" name="pswd" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                    <!-- End of Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

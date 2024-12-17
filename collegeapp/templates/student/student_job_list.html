@@ -1,0 +1,62 @@
+{% extends 'studentindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Job List</h6>
+            <h1 class="mb-5">List of Jobs</h1>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <input type="text" id="jobSearch" class="form-control" placeholder="Search jobs..." onkeyup="searchJobs()" />
+        </div>
+
+        <!-- Job Listings -->
+        <div id="jobList">
+            {% for job in jobs %}
+            <div class="job-details mb-4 p-4 bg-light rounded shadow-sm">   
+                <h3>{{ job.title }}</h3>
+                <p><strong>Company:</strong> {{ job.company_name }}</p>
+                <p><strong>Location:</strong> {{ job.location }}</p>
+                <p><strong>Description:</strong> {{ job.description }}</p>
+                {% if job.qualifications %}
+                    <p><strong>Qualifications:</strong> {{ job.qualifications }}</p>
+                {% endif %}
+                <p><em>Posted on {{ job.created_at|date:"F j, Y" }}</em></p>
+                <a href="{% url 'apply_for_job' %}?id={{ job.id }}" class="btn btn-primary">Apply</a>
+            </div>
+            {% empty %}
+            <p>No available jobs at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Pagination -->
+        <!-- <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">1</span>
+                </li>
+                <li class="page-item">
+                    <span class="page-link">Next</span>
+                </li>
+            </ul>
+        </nav> -->
+<script>
+// JavaScript for search functionality
+function searchJobs() {
+    const input = document.getElementById('jobSearch').value.toLowerCase();
+    const jobCards = document.querySelectorAll('.job-card');
+
+    jobCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(input) ? '' : 'none';
+    });
+}
+</script>
+{% endblock %}

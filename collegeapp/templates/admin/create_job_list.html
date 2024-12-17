@@ -1,0 +1,51 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3 py-2 rounded-pill">Job Listings</h6>
+            <h1 class="mb-5">Create New Job Listing</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="form-container bg-light p-4 rounded shadow-sm">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Job Title</label>
+                            <input type="text" name="title" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Job Description</label>
+                            <textarea name="description" class="form-control form-control-lg" rows="5" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="qualifications" class="form-label">Qualifications</label>
+                            <textarea name="qualifications" class="form-control form-control-lg" rows="5"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="course" class="form-label">Course</label>
+                            <input type="text" name="course" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" name="location" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="company_name" class="form-label">Company Name</label>
+                            <input type="text" name="company_name" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="checkbox" name="is_active" class="form-check-input" checked>
+                            <label class="form-check-label" for="is_active">Active</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Create Job Listing</button>
+                    </form>
+                    <!-- End of Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends 'tutorindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3 py-2 rounded-pill">Add Student</h6>
+            <h1 class="mb-5">Add Student</h1>
+        </div>
+        <!-- Form Container -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="form-container bg-light p-4 rounded shadow-sm">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <!-- Student Name -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Student Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Enter student's name" required>
+                        </div>
+                        <!-- Student Email -->
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label">Student Email</label>
+                            <input type="email" class="form-control form-control-lg" id="id_email" name="email" placeholder="Enter student's email" required>
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="pswd" class="form-label">Password</label>
+                            <input type="password" class="form-control form-control-lg" id="pswd" name="pswd" placeholder="Enter password" required>
+                        </div>
+                        <!-- Course -->
+                        <div class="mb-3">
+                            <label for="id_course" class="form-label">Course</label>
+                            <input type="text" class="form-control form-control-lg" id="id_course" name="course" placeholder="Enter course name" required>
+                        </div>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-lg w-100">Add Student</button>
+                    </form>
+                    <!-- End of Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

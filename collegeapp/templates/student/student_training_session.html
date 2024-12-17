@@ -1,0 +1,66 @@
+{% extends 'studentindex.html' %}
+{% block content %}
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-light text-primary px-3 rounded d-inline-block">Training Sessions</h6>
+            <h1 class="mb-5 text-dark">Explore Available Sessions</h1>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <input type="text" id="sessionSearch" class="form-control form-control-lg shadow-sm" placeholder="Search sessions..." onkeyup="searchSessions()" />
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive mt-5">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Instructor</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="sessionTable">
+                    {% if sessions %}
+                        {% for session in sessions %}
+                            <tr class="session-row">
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ session.title }}</td>
+                                <td>{{ session.description }}</td>
+                                <td>{{ session.date }}</td>
+                                <td>{{ session.location }}</td>
+                                <td>{{ session.instructor }}</td>
+                                <td>
+                                    <a href="{% url 'enroll_training_session' %}?id={{session.id}}" class="btn btn-primary">Enroll</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-muted">No training sessions available at the moment.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+// JavaScript for live search functionality
+function searchSessions() {
+    const input = document.getElementById('sessionSearch').value.toLowerCase();
+    const rows = document.querySelectorAll('.session-row');
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(input) ? '' : 'none';
+    });
+}
+</script>
+{% endblock %}
